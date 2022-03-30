@@ -18,11 +18,15 @@ public class SubsekvensRegister {
         return LokaltRegister.size();
     }
 
-    public void lagHashMapFraFil(String filnavn) {
+    public void lagHashMapFraFil(File data) {
         
+        if(data.getName().compareTo("metadata.csv") == 0){
+            return;
+        }
+
         try {
 
-            File data = new File(filnavn);
+            
             Scanner ny = new Scanner(data);
             String linje; 
             HashMap<String, Subsekvens> NyttHashMap = new HashMap<>();
@@ -54,7 +58,7 @@ public class SubsekvensRegister {
         }
     }
 
-    public static HashMap<String,Subsekvens> SlaaSammenHashMap(HashMap<String, Subsekvens> hash1, HashMap<String, Subsekvens> hash2){
+    public HashMap<String,Subsekvens> SlaaSammenHashMap(HashMap<String, Subsekvens> hash1, HashMap<String, Subsekvens> hash2){
         HashMap<String, Subsekvens> ny = new HashMap<>();
 
         for (String items: hash1.keySet()){
@@ -85,15 +89,4 @@ public class SubsekvensRegister {
     }
 }
 
-/* class Test{
 
-    public static void main(String[] args) {
-        SubsekvensRegister ny = new SubsekvensRegister();
-        ny.lagHashMapFraFil("testdata.csv");
-        ny.lagHashMapFraFil("testdata2.csv");
-        HashMap<String, Subsekvens> tmp = ny.HentHashMap(0);
-        HashMap<String, Subsekvens> tmp2 = ny.HentHashMap(1);
-        SubsekvensRegister.SlaaSammenHashMap(tmp, tmp2);
-    }
-}
- */
