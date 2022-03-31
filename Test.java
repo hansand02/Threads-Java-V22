@@ -1,18 +1,21 @@
 import java.io.File;
 import java.util.HashMap;
-
+import java.util.Scanner;
 
 
 
 
 public class Test {
      
+    // Lag nytt register for testobjektet
     SubsekvensRegister nytt = new SubsekvensRegister();
     Test(String filnavn){
 
     
         try {
             File folder = new File(filnavn);
+        
+            //Lager ny liste med alle filene i en mappe 
             File[] filListe = folder.listFiles();
             
             for(File filer: filListe){
@@ -26,7 +29,9 @@ public class Test {
         }
         
         HashMap<String, Subsekvens> nyHash = new HashMap<>();
+        
         for(HashMap<String, Subsekvens> hashMap: nytt.LokaltRegister) {
+            
             HashMap<String, Subsekvens> resultatHash = nytt.SlaaSammenHashMap(hashMap, nyHash);
             nyHash = resultatHash;
         }
@@ -46,12 +51,12 @@ public class Test {
             }
         }
         
-        System.out.println(stoersteSekvens);
+        System.out.println(stoersteSekvens + " forekommer flest ganger");
     }
 }
+
 class Test2{
     public static void main(String[] args) {
-        Test test = new Test("testdatalitenlike");
-        Test test2 = new Test("testdatalike");
+        Test test = new Test(args[0]);
     }
 }
