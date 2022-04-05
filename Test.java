@@ -2,9 +2,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
 
-
-
-
 public class Test {
      
     // Lag nytt register for testobjektet
