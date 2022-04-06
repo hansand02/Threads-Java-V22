@@ -4,18 +4,18 @@ import java.io.File;
 import java.util.Scanner;
 
 public class SubsekvensRegister {
-    ArrayList<HashMap<String,Subsekvens>> LokaltRegister = new ArrayList<>();
+    ArrayList<HashMap<String,Subsekvens>> lokaltRegister = new ArrayList<>();
 
     public void SettInnHashMap(HashMap<String,Subsekvens> hashMap){
-        LokaltRegister.add(hashMap);
+        lokaltRegister.add(hashMap);
     }
-
+    
     public HashMap<String,Subsekvens> HentHashMap(int indeks ){
-        return LokaltRegister.get(indeks);
+        return lokaltRegister.get(indeks);
     }   
 
     public int RegisterStoerrelse(){
-        return LokaltRegister.size();
+        return lokaltRegister.size();
     }
 
     public void lagHashMapFraFil(File data) {
