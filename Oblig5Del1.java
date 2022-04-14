@@ -2,11 +2,11 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Test {
+public class Oblig5Del1 {
      
     // Lag nytt register for testobjektet
     SubsekvensRegister nytt = new SubsekvensRegister();
-    Test(String filnavn){
+    Oblig5Del1(String filnavn){
 
     
         try {
@@ -54,6 +54,6 @@ public class Test {
 
 class Test2{
     public static void main(String[] args) {
-        Test test = new Test(args[0]);
+        Oblig5Del1 test = new Oblig5Del1(args[0]);
     }
 }

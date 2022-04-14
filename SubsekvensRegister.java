@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class SubsekvensRegister {
-    ArrayList<HashMap<String,Subsekvens>> lokaltRegister = new ArrayList<>();
+    public ArrayList<HashMap<String,Subsekvens>> lokaltRegister = new ArrayList<>();
 
     public void SettInnHashMap(HashMap<String,Subsekvens> hashMap){
         lokaltRegister.add(hashMap);
