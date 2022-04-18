@@ -1,38 +1,40 @@
 import java.io.File;
 import java.util.HashMap;
-import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
 
-public class Oblig5Del1 {
-     
-    // Lag nytt register for testobjektet
-    SubsekvensRegister nytt = new SubsekvensRegister();
-    Oblig5Del1(String filnavn){
-
-    
-        try {
-            File folder = new File(filnavn);
+public class Oblig5Del2A {
+    public static void main(String[] args){
         
+        Monitor1 nyMonitor = new Monitor1();
+        try {
+            File folder = new File(args[0]);
+            
             //Lager ny liste med alle filene i en mappe 
             File[] filListe = folder.listFiles();
             
+
+
+            CountDownLatch latch = new CountDownLatch(filListe.length-1);
+
+
             for(File filer: filListe){
-                nytt.lagHashMapFraFil(filer);
+                nyMonitor.lagHashMapFraFil(filer, latch);  // Feilkoden her er ikke berettiget 
             }
 
+            latch.await();  //Venter til alle traadene har kjoert ferdig foer vi gaar videre   
+
+        } catch (Exception e) {
+          
         } 
-        
-        catch (Exception e) {
-            System.out.println("Filen finnes ikke");
-        }
-        
+
         HashMap<String, Subsekvens> nyHash = new HashMap<>();
-        
-        for(HashMap<String, Subsekvens> hashMap: nytt.lokaltRegister) {
-            
-            HashMap<String, Subsekvens> resultatHash = nytt.SlaaSammenHashMap(hashMap, nyHash);
+
+        for(HashMap<String, Subsekvens> hashMap: nyMonitor.subsekvensRegister.lokaltRegister) {
+            HashMap<String, Subsekvens> resultatHash = nyMonitor.subsekvensRegister.SlaaSammenHashMap(hashMap, nyHash);
             nyHash = resultatHash;
         }
         
+
         Subsekvens stoersteSekvens = null; 
         for(Subsekvens items : nyHash.values()){
             
@@ -49,11 +51,5 @@ public class Oblig5Del1 {
         }
         
         System.out.println(stoersteSekvens + " forekommer flest ganger");
-    }
-}
-
-class Test2{
-    public static void main(String[] args) {
-        Oblig5Del1 test = new Oblig5Del1(args[0]);
     }
 }

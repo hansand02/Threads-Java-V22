@@ -1,22 +1,29 @@
+import java.io.File;
+import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
+import java.util.HashMap;
+
 public class LeseTrad implements Runnable {
+    Monitor1 monitor;
+    File fil;
+    CountDownLatch latch;
 
-    public LeseTrad(File fil, Monitor1 monitor){
-
-        this.fil = fil;
+    public LeseTrad(File fil, Monitor1 monitor, CountDownLatch latch){
         this.monitor = monitor;
-
+        this.fil = fil;
+        this.latch = latch; 
     }
 
     public void run(){
 
-        if(data.getName().compareTo("metadata.csv") == 0){
+        if(fil.getName().compareTo("metadata.csv") == 0){
             return;
         }
-
+        
         try {
 
             
-            Scanner ny = new Scanner(data);
+            Scanner ny = new Scanner(fil);
             String linje; 
             HashMap<String, Subsekvens> NyttHashMap = new HashMap<>();
 
@@ -36,9 +43,10 @@ public class LeseTrad implements Runnable {
                     
                 }
             }
-            this.monitor.SettInnHashMap(NyttHashMap); //Sett kun inn hashmap en gang :) 
             
+            this.monitor.SettInnHashMap(NyttHashMap); //Sett kun inn hashmap en gang :) 
             ny.close();
+            latch.countDown(); // Tell ned etter man har satt hashmappet inn i subsekvensregisteret
 
         } catch (Exception e) {
 
