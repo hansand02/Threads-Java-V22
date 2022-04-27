@@ -25,7 +25,8 @@ public class Monitor1 {
     public void lagHashMapFraFil(File data, CountDownLatch Latch) {
         LeseTrad nyLeseTrad = new LeseTrad(data, this, Latch); 
         Thread t1 = new Thread(nyLeseTrad);
-        t1.start(); 
+        t1.start();
+        
         
     }
 }

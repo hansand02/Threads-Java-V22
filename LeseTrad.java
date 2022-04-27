@@ -45,7 +45,7 @@ public class LeseTrad implements Runnable {
             }
             
             this.monitor.SettInnHashMap(NyttHashMap); //Sett kun inn hashmap en gang :) 
-            ny.close();
+            ny.close();                                 
             latch.countDown(); // Tell ned etter man har satt hashmappet inn i subsekvensregisteret
 
         } catch (Exception e) {

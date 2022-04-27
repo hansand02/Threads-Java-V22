@@ -2,41 +2,47 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 
-public class Oblig5Del2A {
+class Oblig5Del2B{
     public static void main(String[] args){
         
-        Monitor1 nyMonitor = new Monitor1();
+        Monitor2 nyMonitor = new Monitor2();
+        
         try {
             File folder = new File(args[0]);
             
             //Lager ny liste med alle filene i en mappe 
             File[] filListe = folder.listFiles();
             
-
-
+            // tar -1 så man ikke leser metadata. 
             CountDownLatch latch = new CountDownLatch(filListe.length-1);
 
 
             for(File filer: filListe){
-                nyMonitor.lagHashMapFraFil(filer, latch);
+                nyMonitor.lagHashMapFraFil(filer, latch);  
             }
 
-            latch.await();  //Venter til alle traadene har kjoert ferdig foer vi gaar videre   
+            latch.await();  //Venter til alle traadene har kjoert ferdig foer vi gaar videre 
+            
+            CountDownLatch fletteLatch = new CountDownLatch(1);
+            
+            //Lager en loop med lengde aatte for aa faa saa mange traader. 
+            for(int i = 0; i <= 8; i++){
+                nyMonitor.flettHashMaps(fletteLatch);
+            }
+            
+            
+            fletteLatch.await(); // Venter til flettetraadene har flettet hashmapene i monitoren sitt subsekvensregister
 
         } catch (Exception e) {
           
-        } 
-
-        HashMap<String, Subsekvens> nyHash = new HashMap<>();
-
-        for(HashMap<String, Subsekvens> hashMap: nyMonitor.subsekvensRegister.lokaltRegister) {
-            HashMap<String, Subsekvens> resultatHash = nyMonitor.subsekvensRegister.SlaaSammenHashMap(hashMap, nyHash);
-            nyHash = resultatHash;
+        } finally {
+            
         }
         
-
+        // Koden herifra og ned sjekker hvilken sekvens som forekommer oftest
         Subsekvens stoersteSekvens = null; 
-        for(Subsekvens items : nyHash.values()){
+        
+        for(Subsekvens items : nyMonitor.subsekvensRegister.HentHashMap(0).values()){  // Etter fletting vil subsekvensregisteret bare ha ett hashmap
             
             if(stoersteSekvens != null){
             
@@ -52,4 +58,5 @@ public class Oblig5Del2A {
         
         System.out.println(stoersteSekvens + " forekommer flest ganger");
     }
+    
 }
