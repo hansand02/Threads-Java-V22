@@ -1,5 +1,4 @@
 import java.util.concurrent.CountDownLatch; 
-import java.util.concurrent.locks.*;
 
 public class Monitor2 extends Monitor1 {
 

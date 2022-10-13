@@ -1,5 +1,4 @@
 import java.io.File;
-import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 
 class Oblig5Del2B{

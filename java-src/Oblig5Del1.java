@@ -1,6 +1,5 @@
 import java.io.File;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Oblig5Del1 {
      
@@ -54,6 +53,6 @@ public class Oblig5Del1 {
 
 class Test2{
     public static void main(String[] args) {
-        Oblig5Del1 test = new Oblig5Del1(args[0]);
+        new Oblig5Del1(args[0]);
     }
 }

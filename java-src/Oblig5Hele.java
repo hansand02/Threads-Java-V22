@@ -26,7 +26,9 @@ public class Oblig5Hele {
                         metadataHashMap.put(harHatt[0], harHatt[1]);
                         
                     }
+                    metadata.close();
                 }
+                
             }
 
             // tar -1 så man ikke leser metadata. 
